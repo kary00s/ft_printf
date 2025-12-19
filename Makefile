@@ -1,5 +1,5 @@
 
-NAME = libftptintf.a
+NAME = libftprintf.a
 CC = cc
 CFLAGS = -Wall -Werror -Wextra
 

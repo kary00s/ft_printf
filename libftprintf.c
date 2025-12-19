@@ -33,12 +33,12 @@ int	ft_print_arg(va_list *args, char specifier)
 		cnt += ft_puthexa_lo(va_arg(*args, unsigned int));
 	else if (specifier == 'X')
 		cnt += ft_puthexa_up(va_arg(*args, unsigned int));
-	else if (specifier == '%')
-		cnt += ft_putchar(specifier);
+	else
+		ft_putchar(specifier);
 	return (cnt);
 }
 
-int	check_specifier(char specifier)
+int	check_me(char specifier)
 {
 	if (specifier == 'c' || specifier == 's' || specifier == 'p'
 		|| specifier == 'i' || specifier == 'd' || specifier == 'u'
@@ -60,9 +60,10 @@ int	ft_printf(char const *source_str, ...)
 	i = 0;
 	while (source_str[i])
 	{
-		if (source_str[i] == '%' && source_str[i + 1] != 0
-			&& check_specifier(source_str[i + 1]) == 1)
+		if (source_str[i] == '%')
 		{
+			if (source_str[i + 1] == 0)
+				return (-1);
 			cnt += ft_print_arg(&args, source_str[i + 1]);
 			i++;
 		}

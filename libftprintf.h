@@ -14,12 +14,11 @@
 # define LIBFTPRINTF_H
 
 # include <unistd.h>
-# include <stdio.h>
 # include <stdarg.h>
 
 int	ft_printf(char const *source_str, ...);
 int	ft_print_arg(va_list *args, char specifier);
-
+int	check_me(char specifier);
 int	ft_putchar(char c);
 int	ft_putstr(char *str);
 int	ft_putpointer(void *p);

@@ -24,10 +24,7 @@ int	ft_putstr(char *str)
 
 	i = 0;
 	if (!str)
-	{
-		ft_putstr("(null)");
-		return (6);
-	}
+		return (write(1, "(null)", 6));
 	while (str[i])
 	{
 		write(1, &str[i], 1);

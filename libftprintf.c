@@ -34,17 +34,11 @@ int	ft_print_arg(va_list *args, char specifier)
 	else if (specifier == 'X')
 		cnt += ft_puthexa_up(va_arg(*args, unsigned int));
 	else
-		ft_putchar(specifier);
+	{
+		cnt += ft_putchar('%');
+		cnt += ft_putchar(specifier);
+	}
 	return (cnt);
-}
-
-int	check_me(char specifier)
-{
-	if (specifier == 'c' || specifier == 's' || specifier == 'p'
-		|| specifier == 'i' || specifier == 'd' || specifier == 'u'
-		|| specifier == '%' || specifier == 'x' || specifier == 'X')
-		return (1);
-	return (0);
 }
 
 int	ft_printf(char const *source_str, ...)

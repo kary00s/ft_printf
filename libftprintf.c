@@ -12,58 +12,51 @@
 
 #include "libftprintf.h"
 
-int	ft_print_arg(va_list *args, char specifier)
+static int	ft_print_arg(int specifier, va_list args)
 {
 	int	cnt;
 
 	cnt = 0;
-	if (specifier == '%')
-		cnt += ft_putchar('%');
-	else if (specifier == 'c')
-		cnt += ft_putchar(va_arg(*args, int));
+	if (specifier == 'c')
+		cnt = ft_putchar(va_arg(args, int));
 	else if (specifier == 's')
-		cnt += ft_putstr(va_arg(*args, char *));
+		cnt = ft_putstr(va_arg(args, char *));
 	else if (specifier == 'p')
-		cnt += ft_putpointer(va_arg(*args, void *));
+		cnt = put_adrs(va_arg(args, void *));
 	else if (specifier == 'd' || specifier == 'i')
-		cnt += ft_putnbr(va_arg(*args, int));
+		cnt = ft_putnbr(va_arg(args, int));
 	else if (specifier == 'u')
-		cnt += ft_putnbr_un(va_arg(*args, unsigned int));
-	else if (specifier == 'x')
-		cnt += ft_puthexa_lo(va_arg(*args, unsigned int));
-	else if (specifier == 'X')
-		cnt += ft_puthexa_up(va_arg(*args, unsigned int));
-	else
-	{
-		cnt += ft_putchar('%');
-		cnt += ft_putchar(specifier);
-	}
+		cnt = ft_putnbr(va_arg(args, unsigned int));
+	else if (specifier == 'x' || specifier == 'X')
+		cnt = ft_puthexa(va_arg(args, unsigned int), specifier);
+	else if (specifier == '%')
+		cnt = ft_putchar('%');
 	return (cnt);
 }
 
-int	ft_printf(char const *source_str, ...)
+int	ft_printf(const char *source_str, ...)
 {
-	va_list	args;
-	int		i;
-	int		cnt;
+	va_list		args;
+	int			cnt;
+	size_t		i;
 
-	cnt = 0;
-	if (!source_str || write(1, 0, 0) < 0)
+	if (!source_str)
 		return (-1);
-	va_start(args, source_str);
 	i = 0;
+	va_start(args, source_str);
+	cnt = 0;
 	while (source_str[i])
 	{
-		if (source_str[i] == '%')
+		if (s[i] == '%')
 		{
 			if (source_str[i + 1] == 0)
-				return (-1);
-			cnt += ft_print_arg(&args, source_str[i + 1]);
-			i++;
+                return (-1);
+			cnt += ft_print_arg(s[++i], args);
 		}
 		else
-			cnt += ft_putchar(source_str[i]);
-		i++;
+			cnt += ft_putchar(s[i]);
+		if (s[i])
+			i++;
 	}
 	va_end(args);
 	return (cnt);

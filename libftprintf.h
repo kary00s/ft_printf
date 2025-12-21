@@ -12,18 +12,14 @@
 
 #ifndef LIBFTPRINTF_H
 # define LIBFTPRINTF_H
-
-# include <unistd.h>
 # include <stdarg.h>
+# include <unistd.h>
 
-int	ft_printf(char const *source_str, ...);
-int	ft_print_arg(va_list *args, char specifier);
+int	ft_putstr(const char *str);
 int	ft_putchar(char c);
-int	ft_putstr(char *str);
-int	ft_putpointer(void *p);
-int	ft_putnbr(int n);
-int	ft_puthexa_up(unsigned int n);
-int	ft_puthexa_lo(unsigned int n);
-int	ft_putnbr_un(unsigned int n);
+int	ft_putnbr(long nbr);
+int	ft_puthexa(unsigned long n, int specifier);
+int	put_adrs(void *add);
+int	ft_printf(const char *str, ...);
 
 #endif

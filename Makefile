@@ -5,7 +5,7 @@ CFLAGS = -Wall -Werror -Wextra
 
 HEADER = libftprintf.h
 	
-SRCS = libftprintf.c libftprintf_utils.c libftprintf_utils2.c
+SRCS = libftprintf.c utils.c utils2.c
 
 OBJECTS = $(SRCS:.c=.o) 
 	
